@@ -26,6 +26,8 @@ const cards = [
   // Display our data
   // On click: flip cards back and forth
   // Get info for new cards from the user
+    // create data properties for front and back of new cards
+    // Bind those properties to the form input using v-model
   // Add new card when user hits enter or clicks button
   // Delete cards
   // Animate card flip
@@ -35,10 +37,21 @@ const cards = [
     el: '#flashcard-app',
     data: {
       cards: cards,
+      newFront: '',
+      newBack: ''
     },
     methods: {
+        // to display the front/back of card once clicked
         toggleCard: function (card) {
             card.flipped = !card.flipped;
+        },
+        // add new card when button clicked
+        addNew: function() {
+            this.cards.push({
+                front: this.newFront,
+                back: this.newBack,
+                flipped: false
+            });
         }
 
     }
