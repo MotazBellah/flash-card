@@ -22,23 +22,14 @@ const cards = [
     },
   ];
 
-  // TODO:
-  // Display our data
-  // On click: flip cards back and forth
-  // Get info for new cards from the user
-    // create data properties for front and back of new cards
-    // Bind those properties to the form input using v-model
-  // Add new card when user hits enter or clicks button
-  // Delete cards
-  // Animate card flip
-  // Display an error message if form fields are blank
 
   new Vue({
     el: '#flashcard-app',
     data: {
       cards: cards,
       newFront: '',
-      newBack: ''
+      newBack: '',
+      error: false
     },
     methods: {
         // to display the front/back of card once clicked
@@ -47,11 +38,21 @@ const cards = [
         },
         // add new card when button clicked
         addNew: function() {
-            this.cards.push({
-                front: this.newFront,
-                back: this.newBack,
-                flipped: false
-            });
+            // If use does not write in the fron or back
+            // Display message connected to `error`
+            if (!this.newFront || !this.newBack) {
+                this.error = true
+            } else {
+                this.cards.push({
+                    front: this.newFront,
+                    back: this.newBack,
+                    flipped: false
+                });
+                // Reset the input forms
+                this.newFront = '';
+                this.newBack = '';
+                this.error = false;
+            }
         }
 
     }
